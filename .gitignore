@@ -1,0 +1,7 @@
+node_modules/
+.env
+server/certs/
+client/platforms/
+client/plugins/
+*.log
+.DS_Store

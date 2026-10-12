@@ -1,0 +1,20 @@
+# Render Blueprint - deploys the Express API. Secrets are entered in the Render dashboard (sync: false).
+services:
+  - type: web
+    name: moodstreak-api
+    runtime: node
+    rootDir: server
+    buildCommand: npm ci --omit=dev
+    startCommand: node server.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: BEHIND_TLS_PROXY
+        value: "true"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGINS
+        sync: false
