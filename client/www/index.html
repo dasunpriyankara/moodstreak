@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:; connect-src https:;">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>MoodStreak</title>
+  <link rel="stylesheet" href="lib/jquery.mobile.min.css">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<!-- ============ LOGIN ============ -->
+<div data-role="page" id="login" class="auth-page" data-theme="a">
+  <div role="main" class="ui-content auth-wrap">
+    <div class="brand"><span class="brand-logo">🔥</span><h1>MoodStreak</h1><p>Build habits. Understand your mood.</p></div>
+    <form id="login-form" autocomplete="on" novalidate>
+      <label for="login-email" class="ui-hidden-accessible">Email</label>
+      <input type="email" id="login-email" name="email" placeholder="Email" autocomplete="email" data-clear-btn="true">
+      <label for="login-password" class="ui-hidden-accessible">Password</label>
+      <input type="password" id="login-password" name="password" placeholder="Password" autocomplete="current-password">
+      <p class="form-error" id="login-error" role="alert"></p>
+      <button type="submit" class="ui-btn ui-corner-all btn-primary">Log in</button>
+    </form>
+    <p class="switch">New here? <a href="#signup" data-transition="slide">Create an account</a></p>
+  </div>
+</div>
+
+<!-- ============ SIGN UP ============ -->
+<div data-role="page" id="signup" class="auth-page" data-theme="a">
+  <div role="main" class="ui-content auth-wrap">
+    <div class="brand"><span class="brand-logo">🌱</span><h1>Create account</h1><p>Takes less than a minute.</p></div>
+    <form id="signup-form" novalidate>
+      <label for="signup-name" class="ui-hidden-accessible">Name</label>
+      <input type="text" id="signup-name" placeholder="Your name" autocomplete="name" maxlength="60">
+      <label for="signup-email" class="ui-hidden-accessible">Email</label>
+      <input type="email" id="signup-email" placeholder="Email" autocomplete="email">
+      <label for="signup-password" class="ui-hidden-accessible">Password</label>
+      <input type="password" id="signup-password" placeholder="Password (min 8 characters)" autocomplete="new-password">
+      <p class="form-error" id="signup-error" role="alert"></p>
+      <button type="submit" class="ui-btn ui-corner-all btn-primary">Sign up</button>
+    </form>
+    <p class="switch">Already have an account? <a href="#login" data-transition="slide" data-direction="reverse">Log in</a></p>
+  </div>
+</div>
+
+<!-- ============ TODAY ============ -->
+<div data-role="page" id="home" class="app-page">
+  <div data-role="header" data-position="fixed" data-tap-toggle="false" class="app-header">
+    <h1 id="home-title">Today</h1>
+  </div>
+  <div role="main" class="ui-content">
+    <div class="offline-banner" id="offline-banner">You're offline – changes can't be saved</div>
+    <p class="greeting" id="greeting"></p>
+
+    <section class="card">
+      <h2>How are you feeling?</h2>
+      <div class="mood-picker" id="mood-picker" role="radiogroup" aria-label="Mood">
+        <button type="button" data-score="1" role="radio" aria-label="Awful">😞</button>
+        <button type="button" data-score="2" role="radio" aria-label="Low">😕</button>
+        <button type="button" data-score="3" role="radio" aria-label="Okay">😐</button>
+        <button type="button" data-score="4" role="radio" aria-label="Good">🙂</button>
+        <button type="button" data-score="5" role="radio" aria-label="Great">😄</button>
+      </div>
+      <label for="mood-note" class="ui-hidden-accessible">Note</label>
+      <textarea id="mood-note" maxlength="500" placeholder="Anything on your mind? (optional)" rows="2"></textarea>
+      <div class="row">
+        <button type="button" id="mood-save" class="ui-btn ui-corner-all btn-primary">Save mood</button>
+        <button type="button" id="mood-delete" class="ui-btn ui-corner-all btn-ghost" style="display:none">Clear</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-head">
+        <h2>Today's habits</h2>
+        <a href="#habit-form" id="add-habit" class="btn-add" data-transition="slideup" aria-label="Add habit">＋</a>
+      </div>
+      <ul id="habit-list" class="habit-list"></ul>
+      <p class="empty" id="habit-empty" style="display:none">No habits yet. Tap ＋ to add your first one.</p>
+    </section>
+  </div>
+  <div data-role="footer" data-position="fixed" data-tap-toggle="false" class="app-footer">
+    <div data-role="navbar" data-iconpos="top">
+      <ul>
+        <li><a href="#home" class="ui-btn-active ui-state-persist" data-icon="check">Today</a></li>
+        <li><a href="#insights" data-icon="bars">Insights</a></li>
+        <li><a href="#profile" data-icon="user">Profile</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HABIT FORM ============ -->
+<div data-role="page" id="habit-form" class="app-page">
+  <div data-role="header" class="app-header">
+    <a href="#home" data-rel="back" class="ui-btn ui-btn-left ui-icon-carat-l ui-btn-icon-notext ui-corner-all" aria-label="Back">Back</a>
+    <h1 id="habit-form-title">New habit</h1>
+  </div>
+  <div role="main" class="ui-content">
+    <form id="habit-edit-form" novalidate>
+      <input type="hidden" id="habit-id">
+      <label for="habit-name">Habit name</label>
+      <input type="text" id="habit-name" maxlength="60" placeholder="e.g. Drink 2L of water">
+      <label>Pick an icon</label>
+      <div class="emoji-grid" id="emoji-grid"></div>
+      <p class="form-error" id="habit-error" role="alert"></p>
+      <button type="submit" class="ui-btn ui-corner-all btn-primary">Save habit</button>
+      <button type="button" id="habit-delete" class="ui-btn ui-corner-all btn-danger" style="display:none">Delete habit</button>
+    </form>
+  </div>
+</div>
+
+<!-- ============ INSIGHTS ============ -->
+<div data-role="page" id="insights" class="app-page">
+  <div data-role="header" data-position="fixed" data-tap-toggle="false" class="app-header"><h1>Insights</h1></div>
+  <div role="main" class="ui-content">
+    <div class="stat-row">
+      <div class="stat"><span id="avg7">–</span><small>7-day mood</small></div>
+      <div class="stat"><span id="avg30">–</span><small>30-day mood</small></div>
+      <div class="stat"><span id="entries30">0</span><small>entries</small></div>
+    </div>
+    <section class="card">
+      <h2>Mood – last 30 days</h2>
+      <canvas id="mood-chart" width="640" height="300" role="img" aria-label="Line chart of mood over the last 30 days"></canvas>
+    </section>
+    <section class="card" id="best-card" style="display:none">
+      <h2>💡 Your mood booster</h2>
+      <p id="best-text"></p>
+    </section>
+    <section class="card">
+      <h2>Habit streaks</h2>
+      <div id="streak-list"></div>
+      <p class="empty" id="streak-empty" style="display:none">Add habits on the Today tab to see streaks here.</p>
+    </section>
+  </div>
+  <div data-role="footer" data-position="fixed" data-tap-toggle="false" class="app-footer">
+    <div data-role="navbar" data-iconpos="top"><ul>
+      <li><a href="#home" data-icon="check">Today</a></li>
+      <li><a href="#insights" class="ui-btn-active ui-state-persist" data-icon="bars">Insights</a></li>
+      <li><a href="#profile" data-icon="user">Profile</a></li>
+    </ul></div>
+  </div>
+</div>
+
+<!-- ============ PROFILE ============ -->
+<div data-role="page" id="profile" class="app-page">
+  <div data-role="header" data-position="fixed" data-tap-toggle="false" class="app-header"><h1>Profile</h1></div>
+  <div role="main" class="ui-content">
+    <section class="card profile-card">
+      <div class="avatar" id="avatar">?</div>
+      <h2 id="profile-name">–</h2>
+      <p id="profile-email" class="muted">–</p>
+    </section>
+    <section class="card">
+      <h2>Daily reminder</h2>
+      <p class="muted">Get a nudge to log your mood and habits.</p>
+      <div class="row">
+        <input type="time" id="reminder-time" value="20:00">
+        <button type="button" id="reminder-save" class="ui-btn ui-corner-all btn-primary">Set reminder</button>
+      </div>
+      <p class="muted" id="reminder-status"></p>
+    </section>
+    <button type="button" id="logout-btn" class="ui-btn ui-corner-all btn-danger">Log out</button>
+  </div>
+  <div data-role="footer" data-position="fixed" data-tap-toggle="false" class="app-footer">
+    <div data-role="navbar" data-iconpos="top"><ul>
+      <li><a href="#home" data-icon="check">Today</a></li>
+      <li><a href="#insights" data-icon="bars">Insights</a></li>
+      <li><a href="#profile" class="ui-btn-active ui-state-persist" data-icon="user">Profile</a></li>
+    </ul></div>
+  </div>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="cordova.js"></script>
+<script src="lib/jquery.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/app-init.js"></script>
+<script src="lib/jquery.mobile.min.js"></script>
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

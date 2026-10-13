@@ -1,0 +1,32 @@
+{
+  "name": "com.moodstreak.app",
+  "displayName": "MoodStreak",
+  "version": "1.0.0",
+  "description": "Habit and mood journal - Cordova hybrid app",
+  "main": "index.js",
+  "scripts": {
+    "serve": "npx http-server www -p 8080",
+    "build:android": "cordova build android",
+    "run:android": "cordova run android"
+  },
+  "keywords": ["ecosystem:cordova"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "cordova-android": "^15.1.0",
+    "cordova-ios": "^8.1.1",
+    "cordova-plugin-local-notification": "^1.2.3",
+    "cordova-plugin-network-information": "^3.1.0",
+    "cordova-plugin-statusbar": "^4.0.0",
+    "cordova-plugin-vibration": "^3.1.1"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-network-information": {},
+      "cordova-plugin-vibration": {},
+      "cordova-plugin-local-notification": {}
+    },
+    "platforms": ["android"]
+  }
+}

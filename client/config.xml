@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.moodstreak.app" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>MoodStreak</name>
+    <description>Build habits. Understand your mood.</description>
+    <author email="you@example.com" href="https://example.com">MoodStreak Team</author>
+    <content src="index.html" />
+    <!-- Only HTTPS traffic to the API is permitted. Replace with your Render hostname. -->
+    <access origin="https://*.onrender.com" />
+    <access origin="https://localhost" />
+    <allow-navigation href="https://localhost/*" />
+    <allow-intent href="https://*/*" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="Orientation" value="portrait" />
+    <preference name="BackgroundColor" value="0xff6c4cf1" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarBackgroundColor" value="#6c4cf1" />
+    <platform name="android">
+        <preference name="Scheme" value="https" />
+        <preference name="Hostname" value="localhost" />
+        <preference name="AndroidPostSplashScreenTheme" value="@style/Theme.AppCompat.NoActionBar" />
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
+            <application android:usesCleartextTraffic="false" />
+        </edit-config>
+    </platform>
+    <platform name="ios">
+        <preference name="Scheme" value="app" />
+    </platform>
+</widget>
