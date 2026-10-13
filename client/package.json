@@ -9,12 +9,15 @@
     "build:android": "cordova build android",
     "run:android": "cordova run android"
   },
-  "keywords": ["ecosystem:cordova"],
+  "keywords": [
+    "ecosystem:cordova"
+  ],
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "cordova-android": "^15.1.0",
     "cordova-ios": "^8.1.1",
+    "cordova-plugin-device": "^3.0.0",
     "cordova-plugin-local-notification": "^1.2.3",
     "cordova-plugin-network-information": "^3.1.0",
     "cordova-plugin-statusbar": "^4.0.0",
@@ -27,6 +30,9 @@
       "cordova-plugin-vibration": {},
       "cordova-plugin-local-notification": {}
     },
-    "platforms": ["android"]
+    "platforms": [
+      "android",
+      "ios"
+    ]
   }
 }
