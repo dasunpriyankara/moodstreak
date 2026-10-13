@@ -5,3 +5,4 @@ client/platforms/
 client/plugins/
 *.log
 .DS_Store
+.idea/
