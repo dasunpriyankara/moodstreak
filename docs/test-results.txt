@@ -1,0 +1,33 @@
+ok 1 - signup creates account and returns token
+ok 2 - duplicate signup -> 409
+ok 3 - weak password / bad email -> 400
+ok 4 - NoSQL-injection style payload rejected
+ok 5 - login ok / wrong password 401
+ok 6 - protected routes need token
+ok 7 - /me returns profile
+ok 1 - auth
+ok 1 - create
+ok 2 - validation
+ok 3 - update
+ok 4 - check-in is idempotent and drives streak
+ok 5 - bad date rejected
+ok 6 - un-check
+ok 7 - another user cannot see or modify it (IDOR)
+ok 8 - delete
+ok 2 - habits (GET/POST/PUT/DELETE)
+ok 1 - create / duplicate day 409
+ok 2 - score range validated
+ok 3 - list with range / update / delete
+ok 3 - moods
+ok 1 - summary computes mood lift for a habit
+ok 4 - stats
+ok 1 - revokes the token
+ok 5 - logout
+ok 1 - CORS allows Cordova origin, blocks unknown
+ok 2 - security headers, malformed JSON, 404
+ok 3 - streak helpers
+ok 6 - misc
+# tests 23
+# suites 6
+# pass 23
+# fail 0
