@@ -1,6 +1,18 @@
 :root{--brand:#6c4cf1;--brand-2:#8b6cff;--ink:#1f2238;--muted:#7b8097;--bg:#f4f5fb;--card:#fff;--ok:#2fbf71;--danger:#e5484d;--radius:18px}
 html,body,.ui-page{background:var(--bg)!important;color:var(--ink);font-family:-apple-system,"SF Pro Text",Roboto,"Segoe UI",sans-serif}
-.ui-mobile .ui-page{padding-top:env(safe-area-inset-top)}
+/* keep fixed header out of the notch / Dynamic Island */
+.app-header.ui-header{padding-top:env(safe-area-inset-top)}
+.ui-page-header-fixed{padding-top:calc(2.8125em + env(safe-area-inset-top))!important}
+
+/* login / signup have no header */
+.auth-page .ui-content{padding-top:calc(9vh + env(safe-area-inset-top))}
+
+/* home indicator area at the bottom */
+.app-footer.ui-footer{padding-bottom:env(safe-area-inset-bottom)}
+.app-header .ui-btn-left,
+.app-header .ui-btn-right{
+    top:calc(.4em + env(safe-area-inset-top))!important;
+}
 h1,h2,p{margin:0}
 .ui-content{padding:14px 16px 90px;max-width:560px;margin:0 auto}
 /* header / footer */
