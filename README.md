@@ -2,6 +2,11 @@
 
 Three-tier hybrid app: **jQuery Mobile + Cordova client → Express/Node HTTPS API → MongoDB Atlas**.
 
+
+GitHub: [https://github.com/dasunpriyankara/moodstreak](https://github.com/dasunpriyankara/moodstreak)
+
+Live API (Render): [https://moodstreak.onrender.com](https://moodstreak.onrender.com)
+
 ```
 moodstreak/
 ├── client/              Cordova project (config.xml, www/ = jQuery Mobile web app)
