@@ -19,6 +19,7 @@ module.exports = function createApp(store) {
   app.use(express.json({ limit: '10kb' }));
 
   app.get('/health', (req, res) => res.json({ status: 'ok' }));
+  app.get('/', (req, res) => res.type('text').send('MoodStreak API'));   // <-- add this
 
   const auth = authenticate(store);
   app.use('/api/auth', require('./routes/auth')(store, auth));
