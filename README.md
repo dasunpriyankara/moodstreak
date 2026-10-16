@@ -7,6 +7,18 @@ GitHub: [https://github.com/dasunpriyankara/moodstreak](https://github.com/dasun
 
 Live API (Render): [https://moodstreak.onrender.com](https://moodstreak.onrender.com)
 
+## Version control
+
+The full history of changes is kept in GitHub: https://github.com/dasunpriyankara/moodstreak
+
+### Contributors
+![GitHub Insights - Contributors](docs/screenshots/Github-repo-insight.png)
+
+### Commit history
+![GitHub commit history](docs/screenshots/github-repo-commit-1.png)
+
+![GitHub commit history](docs/screenshots/github-repo-commit-2.png)
+
 ```
 moodstreak/
 ├── client/              Cordova project (config.xml, www/ = jQuery Mobile web app)
